@@ -32,6 +32,22 @@ ol, ul {
   width: 34px;
 }
 
+.square-dark {
+  border: 1px solid #4d4d4d;
+  width: 62px;
+  height: 62px;
+  margin: 4px 4px;
+  background-image: linear-gradient(to right, #0d0d0d , #202020);
+}
+
+.square-light {
+  border: 1px solid #5a8abe;
+  width: 62px;
+  height: 62px;
+  margin: 4px 4px;
+  background-image: linear-gradient(to right, #346396 , #5a8abe);
+}
+
 .square:focus {
   outline: none;
 }

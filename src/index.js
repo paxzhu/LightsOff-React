@@ -2,23 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-let BlockBlue = '#497bb1';
-let BlockBlack = '#131313';
+const BlockBlue = '#497bb1';
+const BlockBlack = '#131313';
+const bgcolor = [BlockBlack, BlockBlue]
 let BOARD_W = 10;
 let BOARD_H = 10;
 
 function Square(props) {
     return (
-      <button className="square" style={{background: props.background}} onClick={props.onClick}> 
+      <button className={props.lightoff ? "square-dark" : "square-light"}  onClick={props.onClick}> 
       </button>
     );
 }
 
-function getRandomColor() {
-  const color = [BlockBlack, BlockBlue];
+function getRandomNum() {
   const randomNum = Math.random();
-  const index = (randomNum < 0.5) ? 0 : 1;
-  return color[index];
+  const num = (randomNum < 0.5) ? 0 : 1;
+  return num
 }
 
 
@@ -26,7 +26,7 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      squares: Array.from({length:BOARD_H}, () => Array(BOARD_W).fill(null).map(() => getRandomColor())),
+      squares: Array.from({length:BOARD_H}, () => Array(BOARD_W).fill(null).map(() => getRandomNum())),
     };
   }
 
@@ -38,7 +38,7 @@ class Board extends React.Component {
       const [di, dj] = neis[index];
       const x = i + di, y = j + dj;
       if( 0 <= x && x < squares[0].length &&  0 <= y && y < squares.length) {
-        squares[x][y] = (squares[x][y] === BlockBlack) ? BlockBlue : BlockBlack;
+        squares[x][y] = (squares[x][y] === 0) ? 1 : 0;
       }
     }
     this.setState({
@@ -47,7 +47,7 @@ class Board extends React.Component {
   }
 
   renderSquare(i, j) {
-    return <Square background={this.state.squares[i][j]} onClick={() => this.handleClick(i, j) } />;
+    return <Square lightoff={this.state.squares[i][j]} onClick={() => this.handleClick(i, j) } />;
   }
 
   render() {
